@@ -63,17 +63,19 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="./index.php">Books</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Loans</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"></a>
-          </li>
-        </ul>
+          
+          <?php
+          session_start();
+          if (isset($_SESSION['access'])) {
+          echo '<li class="nav-item">
+                  <a class="nav-link" href="#">Loans</a>
+                </li>';
+          } 
+          ?>
+          </ul>
       </div>
       
       <?php
-      session_start();
       if (!isset($_SESSION['access'])) {
         echo '<div class="btn-group" role="group" style="padding-right: 20px;">
                 <button type="button" class="btn btn-outline-primary" onclick="window.location = \'../php/login.php\'">Login</button> 

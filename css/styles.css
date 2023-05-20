@@ -14,7 +14,7 @@ body {
 }
 .container {
   max-width: 700px;
-  width: 100%;
+  /* width: 40%; */
   background-color: #fff;
   padding: 25px 30px;
   border-radius: 5px;
@@ -126,4 +126,32 @@ form .button input:hover {
   top: 50px;
   font-weight: 900;
   color: white;
+}
+
+
+.back-button {
+  color: #9b59b6;
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: #71b7e6 1px solid;
+  margin: 30px;
+}
+
+.back-button:hover {
+  background-color: #9b59b6;
+  color: white;
+  border: none;
+}
+
+.back-icon {
+  font-size: 15px;
+  font-weight: 900;
 }

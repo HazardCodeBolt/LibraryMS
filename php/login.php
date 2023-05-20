@@ -7,58 +7,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/styles.css">
   <title>Library MS</title>
-  <style>
-     .back-button {
-            color: #9b59b6;
-            background-color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: #71b7e6  1px solid;
-            margin: 30px;
-        }
-        .back-button:hover {
-          background-color: #9b59b6;
-          color : white;
-          border: none;
-        }
-
-        .back-icon {
-            font-size: 15px;
-            font-weight: 900;
-        }
-  </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script src="https://kit.fontawesome.com/1d03971c39.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-<button class="back-button" onclick="window.history.back()">
+  <button class="back-button" onclick="window.history.back()">
     <i class="fas fa-arrow-left back-icon"></i>
   </button>
   <div class="container">
-  
+
     <div class="title">Login</div>
     <div class="content">
-      <form action="#" id="login-form">
+      <form action="#" id="login-form" method="POST">
         <div class="user-details">
           <div class="input-box">
             <span class="details">Username</span>
-            <input align="center" type="text" placeholder="Enter your username" required>
+            <input name='username' align="center" type="text" placeholder="Enter your username" required>
           </div>
           <div class="input-box">
             <span class="details">Password</span>
-            <input align="center" type="text" placeholder="Enter your password" required>
+            <input name='password' align="center" type="password" placeholder="Enter your password" required>
           </div>
         </div>
         <div class="button">
-          <input type="button" value="login">
+          <input type="submit" value="login" name='login'>
           <input type="reset" value="reset">
         </div>
       </form>
@@ -70,9 +43,29 @@
 
 
 <?php
-  
+session_start();
+include('dbconnect.php');
+if (isset($_POST['login'])) {
+
+  $name = $_POST['username'];
+  $pass = $_POST['password'];
+
+  $query = "select * from user where username='$name' and  password='$pass'";
+  $result = mysqli_query($conn, $query);
+
+  $affected_rows = mysqli_num_rows($result);
+  if ($affected_rows == 1) {
+    $row = mysqli_fetch_array($result);
+    $_SESSION['userid'] = $row['userid'];
+    $_SESSION['username'] = $name;
+    $_SESSION['password'] = $pass;
+    $_SESSION['access'] = true;
+
+    header('location:../php/index.php');
+  } else {
+    echo "<p class='resp'> There is no such user </p>" . mysqli_error($conn);
+  }
+}
+mysqli_close($conn);
 
 ?>
-
-
-    

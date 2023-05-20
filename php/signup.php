@@ -7,34 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/styles.css">
   <title>Library MS</title>
-  <style>
-    .back-button {
-      color: #9b59b6;
-      background-color: white;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: #71b7e6 1px solid;
-      margin: 30px;
-    }
-
-    .back-button:hover {
-      background-color: #9b59b6;
-      color: white;
-      border: none;
-    }
-
-    .back-icon {
-      font-size: 15px;
-      font-weight: 900;
-    }
-  </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script src="https://kit.fontawesome.com/1d03971c39.js" crossorigin="anonymous"></script>
 </head>
@@ -89,6 +61,12 @@ if (isset($_POST['signup'])) {
 
   $affected_rows = mysqli_affected_rows($conn);
   if ($affected_rows == 1) {
+
+    $query = "select userid from user where username='$name' and  password='$pass'";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_array($result);
+    
+    $_SESSION['userid'] = $row['userid'];
     $_SESSION['username'] = $name;
     $_SESSION['password'] = $pass;
     $_SESSION['email'] = $mail;
