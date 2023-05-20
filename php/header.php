@@ -68,7 +68,7 @@
           session_start();
           if (isset($_SESSION['access'])) {
           echo '<li class="nav-item">
-                  <a class="nav-link" href="#">Loans</a>
+                  <a class="nav-link" href="./loans.php">Loans</a>
                 </li>';
           } 
           ?>
