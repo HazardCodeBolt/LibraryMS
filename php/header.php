@@ -66,7 +66,12 @@
           
           <?php
           session_start();
-          if (isset($_SESSION['access'])) {
+          if(isset($_SESSION['access']) && isset($_SESSION['isadmin']) && $_SESSION['isadmin']==1) {
+            echo '<li class="nav-item">
+                    <a class="nav-link" href="./admin-loans.php">Loans</a>
+                  </li>';
+          }
+          elseif (isset($_SESSION['access'])) {
           echo '<li class="nav-item">
                   <a class="nav-link" href="./loans.php">Loans</a>
                 </li>';
@@ -76,6 +81,7 @@
       </div>
       
       <?php
+      
       if (!isset($_SESSION['access'])) {
         echo '<div class="btn-group" role="group" style="padding-right: 20px;">
                 <button type="button" class="btn btn-outline-primary" onclick="window.location = \'../php/login.php\'">Login</button> 

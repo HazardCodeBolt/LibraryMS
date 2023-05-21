@@ -6,7 +6,7 @@ include('dbconnect.php');
 $query = "select bookid, title, auther, isbn, publisher, pubyear, imageurl from book";
 $result = mysqli_query($conn, $query);
 
-if (isset($_SESSION['access'])) {
+if (isset($_SESSION['access']) && isset($_SESSION['isadmin']) && $_SESSION['isadmin']==1) {
 echo "
     <div class='d-grid m-3 gap-2'>
       <button class='btn btn-primary' type='button' onclick='window.location=\"./add-book.php\"'>Add New Book</button>
@@ -39,7 +39,16 @@ while ($row = mysqli_fetch_array($result)) {
       <li class='list-group-item'>Publisher : $publisher</li>
     </ul>
     ";
-  if (isset($_SESSION['access'])) {
+
+  if(isset($_SESSION['access']) && isset($_SESSION['isadmin']) && $_SESSION['isadmin']==1) {
+    echo "<div class='card-body'>
+              <div class='d-grid gap-2 col-6 mx-auto'>
+              <button class='btn btn-primary' type='button' onclick='window.location=\"../php/edit-book.php?bookid=$bookid\"'>Edit</button>
+                <button class='btn btn-primary' type='button' onclick='window.location=\"../php/delete-book.php?bookid=$bookid\"'>Delete</button>
+              </div>
+            </div>";
+  }
+  elseif (isset($_SESSION['access'])) {
 
     echo "<div class='card-body'>
               <div class='d-grid gap-2 col-6 mx-auto'>

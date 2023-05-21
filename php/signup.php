@@ -62,7 +62,7 @@ if (isset($_POST['signup'])) {
   $affected_rows = mysqli_affected_rows($conn);
   if ($affected_rows == 1) {
 
-    $query = "select userid from user where username='$name' and  password='$pass'";
+    $query = "select userid, isadmin from user where username='$name' and  password='$pass'";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_array($result);
     
@@ -71,6 +71,7 @@ if (isset($_POST['signup'])) {
     $_SESSION['password'] = $pass;
     $_SESSION['email'] = $mail;
     $_SESSION['access'] = true;
+    $_SESSION['isadmin'] = $row['isadmin'];
     
     header('location:../php/index.php');
   } else {

@@ -4,7 +4,7 @@ include('dbconnect.php');
 
 if (isset($_SESSION['access'])) {
   $userid = $_SESSION['userid'];
-  $query = "select bookid, userid, returndate, loandate, loanid from loan where userid='$userid'";
+  $query = "select bookid, userid, returndate, loandate, loanid from loan";
   $result = mysqli_query($conn, $query);
 
   echo "<div class='container m-3 d-flex flex-wrap'>";
@@ -35,6 +35,10 @@ if (isset($_SESSION['access'])) {
              <div class='card-body'>
                <h5 class='card-title'>$title</h5>
                <p class='card-text'>Return Date : $returndate</p>
+               <p class='card-text'>User ID : $userid</p>
+               <p>
+                 <a class='btn btn-primary' href='./admin-return.php?loanid=$loanid'>Return Book</a>
+               </p>
              </div>
              <div class='card-footer text-body-secondary'>$diffDays days ago</div>
              </div>";

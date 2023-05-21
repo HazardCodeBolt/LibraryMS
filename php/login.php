@@ -50,7 +50,7 @@ if (isset($_POST['login'])) {
   $name = $_POST['username'];
   $pass = $_POST['password'];
 
-  $query = "select * from user where username='$name' and  password='$pass'";
+  $query = "select userid, isadmin from user where username='$name' and  password='$pass'";
   $result = mysqli_query($conn, $query);
 
   $affected_rows = mysqli_num_rows($result);
@@ -60,7 +60,8 @@ if (isset($_POST['login'])) {
     $_SESSION['username'] = $name;
     $_SESSION['password'] = $pass;
     $_SESSION['access'] = true;
-
+    $_SESSION['isadmin'] = $row['isadmin'];
+    
     header('location:../php/index.php');
   } else {
     echo "<p class='resp'> There is no such user </p>" . mysqli_error($conn);
