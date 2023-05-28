@@ -18,6 +18,7 @@
       font-family: 'Maven Pro', sans-serif !important;
       font-weight: 600 !important;
       color: #2f4858 !important;
+      background: linear-gradient(135deg, #1fffff, #9b59b6);
     }
 
     .btn-outline-primary {
@@ -38,10 +39,10 @@
     }
 
     footer {
-      background-color: #292F36;
+      background-color: #fff;
       padding: 10px;
       text-align: center;
-      color: white;
+      color: 292F36;
 
     }
 

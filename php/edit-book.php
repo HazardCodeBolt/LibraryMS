@@ -93,14 +93,14 @@ if (isset($_POST['addbook'])) {
 
 
 
-  $query = "insert into book 
-  (title, auther, isbn, publisher, pubyear, imageurl) 
-  values ('$title', '$author', '$isbn', '$publisher', '$pdate', '$picurl')";
+  $query = "update book set 
+  title='$title', auther='$author', isbn='$isbn', publisher='$publisher', pubyear='$pdate', imageurl='$picurl' 
+  where bookid=$bookid";
   $result = mysqli_query($conn, $query);
 
   $affected_rows = mysqli_affected_rows($conn);
   if ($affected_rows == 1) {
-    header('location:../php/add-book.php');
+    header('location:../php/index.php');
   } else {
     echo "<p class='resp'> There was something wrong </p>" . mysqli_error($conn);
   }
